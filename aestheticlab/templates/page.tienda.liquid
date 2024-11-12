@@ -1,0 +1,184 @@
+
+    <!-- tienda.liquid -->
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tienda - {{ page_title }}</title>
+        <link rel="stylesheet" href="{{ 'tienda.css' | asset_url }}">
+        <link rel="stylesheet" href="{{ 'product.css' | asset_url }}">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+        {{ content_for_header }}
+    </head>
+    <body>
+        <div id="tienda" style="min-height: 100vh; width: 100%; background-color: rgba(0, 0, 0, 0.8); background-image: url('{{ "shop_background.png" | asset_url }}'); background-position: center; background-size: cover; background-repeat: no-repeat; padding: 70px 20px; position: relative;">
+
+            <div class="tienda-logo">
+                <img src="{{ 'al_logo.png' | asset_url }}" alt="Logo de Tienda" style="max-width: 300px;">
+            </div>
+        
+        
+            <div class="menu-container">
+                <div class="menu">
+                    <a href="#" class="bold" onclick="showSection('tienda-content'); return false;">Tienda</a>
+                    <a href="#" class="bold" onclick="showSection('quienes-somos-content'); return false;">Quienes Somos</a>
+                    <a href="#" class="bold" onclick="showSection('contacto-content'); return false;">Contacto</a>
+                    <a href="/cart" class="bold cart-link">
+                        <span>Carrito</span>
+                        <span class="material-icons-outlined cart-icon">shopping_cart</span>
+                        {% if cart.item_count > 0 %}
+                            <span class="cart-count">{{ cart.item_count }}</span>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+            
+            <div id="sections-container">
+                <div id="tienda-content" class="section-content">
+                    <div class="productos">
+                      {% for product in collections['essential-drop'].products %}
+                        <a href="{{ product.url }}" class="producto-container">
+                          <div class="imagen-container">
+                            <img class="imagen-frontal" src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }} Front">
+                            <img class="imagen-trasera" src="{{ product.images[1] | img_url: 'medium' }}" alt="{{ product.title }} Back">
+                          </div>
+                          <div class="producto-nombre">{{ product.title }}</div>
+                        </a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  
+                
+                  <div id="quienes-somos-content" class="section-content" style="display: none;">
+                    <div class="quienes-somos-container">
+                        <h2>Aesthetic Lab</h2>
+                        <p>Somos dos amigos de 20 años que han decidido emprender en una marca de ropa de gimnasio. Lo que comenzó como una chispa de inspiración se ha convertido en Aesthetic Lab, una marca que fusiona el estilo contemporáneo con la calidad excepcional.</p>
+                        
+                        <!-- Sección de socios -->
+                        <div class="socios">
+                            <div class="socio">
+                                <img src="{{ 'socio1.png' | asset_url }}" alt="Socio 1" class="socio-imagen">
+                                <p class="socio-nombre">Oriol Collado</p>
+                            </div>
+                            <div class="socio">
+                                <img src="{{ 'socio2.png' | asset_url }}" alt="Socio 2" class="socio-imagen">
+                                <p class="socio-nombre">Sergi Barragan</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Valores de la marca -->
+                        <div class="valores">
+                            <div class="valor">
+                                <h3>Calidad</h3>
+                                <p>Utilizamos los mejores materiales y procesos de fabricación para garantizar productos duraderos.</p>
+                            </div>
+                            <div class="valor">
+                                <h3>Diseño</h3>
+                                <p>Todo ha sido diseñado por nosotros a mano desde el principio, a base de prueba y error, para ofrecer un estilo único y funcional.</p>
+                            </div>
+                            <div class="valor">
+                                <h3>Sostenibilidad</h3>
+                                <p>Usamos materiales 100% algodón, resistentes a lavados y manchas, para un menor impacto en el medio ambiente y una larga durabilidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div id="contacto-content" class="section-content" style="display: none;">
+                    <div class="contacto-container">
+                        <h2>Contacto</h2>
+                        <div class="contacto-info">
+                            <div class="info-item">
+                                <h3>Email</h3>
+                                <p>info@aestheticlab.com</p>
+                            </div>
+                            <div class="info-item">
+                                <h3>Teléfono</h3>
+                                <p>+34 XXX XXX XXX</p>
+                            </div>
+                            <div class="info-item">
+                                <h3>Redes Sociales</h3>
+                                <div class="social-links">
+                                    <a href="#" target="_blank">Instagram</a>
+                                    <a href="#" target="_blank">Facebook</a>
+                                    <a href="#" target="_blank">Twitter</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            function showSection(sectionId) {
+                const sections = document.getElementsByClassName('section-content');
+                for (let section of sections) {
+                    section.style.display = 'none';
+                }
+        
+                document.getElementById(sectionId).style.display = 'block';
+        
+                const menuLinks = document.querySelectorAll('.menu a');
+                menuLinks.forEach(link => {
+                    if (link.getAttribute('onclick')?.includes(sectionId)) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+        
+            // Al cargar la página, mostrar la tienda inicialmente
+            window.addEventListener('load', function() {
+                showSection('tienda-content');
+            });
+        
+            // Actualización dinámica del carrito
+            function updateCartCount() {
+                fetch('/cart.js')
+                    .then(response => response.json())
+                    .then(data => {
+                        const cartCount = data.item_count;
+                        const cartCountElement = document.querySelector('.cart-count');
+                        const cartLink = document.querySelector('.cart-link');
+        
+                        if (cartCount > 0) {
+                            if (cartCountElement) {
+                                cartCountElement.textContent = cartCount;
+                            } else {
+                                const newCartCount = document.createElement('span');
+                                newCartCount.className = 'cart-count';
+                                newCartCount.textContent = cartCount;
+                                cartLink.appendChild(newCartCount);
+                            }
+                        } else {
+                            if (cartCountElement) {
+                                cartCountElement.remove();
+                            }
+                        }
+                    })
+                    .catch(error => console.error('Error actualizando el carrito:', error));
+            }
+        
+            window.addEventListener('load', updateCartCount);
+        </script>
+    
+        <footer class="footer" style="background-image: url('{{ "footer.png" | asset_url }}');">
+            <p class="footer-text">"La moda es arte en movimiento" — Desarrollado por Adrián Gutiérrez. — Para Aestheticlab</p>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/aestheticlab.official/" target="_blank">Instagram</a> |
+                <a href="https://www.tiktok.com/@aestheticlab.official?is_from_webapp=1&sender_device=pc" target="_blank">Tiktok</a>
+                
+            </div>
+        </footer>
+    
+        {{ content_for_footer }}
+    </body>
+    </html>

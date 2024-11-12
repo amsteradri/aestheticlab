@@ -1,0 +1,57 @@
+<!-- index.liquid -->
+<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ page_title }}</title>
+        <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+        {{ content_for_header }}
+    </head>
+    <body style="
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        background-image: url('{{ "al_background.png" | asset_url }}');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+        z-index: 0;
+    ">
+    
+        <div id="inicio" class="container">
+            <div class="logo">
+                <img src="{{ 'al3d.gif' | asset_url }}" alt="Aesthetic Lab Logo">
+            </div>
+            <a href="/pages/tienda" class="access-button" onclick="startTransition(event)">ACCEDER</a>
+        </div>
+    
+        {{ content_for_footer }}
+        <div class="overlay"></div>
+    </body>
+
+    <script>
+        function startTransition(e) {
+            e.preventDefault();
+            const overlay = document.querySelector('.overlay');
+            const container = document.querySelector('#inicio');
+            
+            // Inicia la animación de salida
+            container.classList.add('page-exit');
+            
+            // Después de la animación, navega a la siguiente página
+            setTimeout(() => {
+                window.location.href = e.target.href;
+            }, 800);
+        }
+        </script>
+    </html>

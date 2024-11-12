@@ -1,0 +1,121 @@
+<head>
+    <link rel="stylesheet" href="{{ 'product.css' | asset_url }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="background-image: url('{{ 'shop_background.png' | asset_url }}'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+
+    <div class="logo-container">
+        <img src="{{ 'al_logo.png' | asset_url }}" alt="Logo" class="logo">
+    </div>
+
+    <div class="product-details">
+        
+        <!-- Contenedor para la imagen principal y las miniaturas -->
+        <div class="product-images-container">
+            <div class="product-image-container">
+                <!-- Imagen principal del producto (delante de la camiseta) -->
+                <img src="{{ product.featured_image | img_url: '1024x1024' }}" alt="{{ product.title }}" class="product-main-image" id="main-product-image">
+            </div>
+
+            <!-- Contenedor con las imágenes pequeñas para alternar entre la parte delantera y trasera -->
+            <div class="product-thumbnails">
+                {% for image in product.images %}
+                    <div class="thumbnail-container">
+                        <img src="{{ image | img_url: '256x256' }}" alt="Imagen del producto" class="thumbnail" onclick="changeMainImage('{{ image | img_url: '1024x1024' }}')">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Bloque de información del producto -->
+        <div class="product-details-info">
+            <h1 class="product-name">{{ product.title }}</h1>
+            <p class="product-description" style="font-size: 2rem; font-weight: bold; color: #ffffff; text-transform: uppercase; font-family: 'Titillium Web', sans-serif; letter-spacing: 2px; transform: scaleY(0.7); margin-top: 0; margin-bottom: 10px; line-height: 1.6;">
+                {{ product.description }}
+            </p>
+            <p class="product-material">·Material: 100% Algodón</p>
+            
+            <div class="product-options">
+                <label for="size">Talla:</label>
+                <div class="size-buttons">
+                    {% for variant in product.variants %}
+                        {% if variant.available %}
+                            <button type="button" class="size-button" data-id="{{ variant.id }}" onclick="selectSize('{{ variant.id }}', '{{ variant.title }}')">
+                                {{ variant.title }}
+                            </button>
+                        {% else %}
+                            <button type="button" class="size-button unavailable" disabled>
+                                {{ variant.title }}
+                            </button>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Contenedor para la cantidad, justo encima del precio -->
+            <div class="quantity-container">
+                <button type="button" class="quantity-button" onclick="updateQuantity(-1)">-</button>
+                <input type="number" id="quantity-input" name="quantity" value="1" min="1" max="10" />
+                <button type="button" class="quantity-button" onclick="updateQuantity(1)">+</button>
+            </div>
+
+            <p class="product-price">{{ product.price | money }}</p>
+
+            <div class="product-add-to-cart">
+                <form action="/cart/add" method="post">
+                    <!-- Campo oculto para almacenar el ID de la variante seleccionada -->
+                    <input type="hidden" name="id" id="variant-id" value="{{ product.variants.first.id }}">
+                    <input type="hidden" name="quantity" id="hidden-quantity" value="1">
+                    <button type="submit" class="add-to-cart-button" id="add-to-cart-button" disabled>Añadir al carrito</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para cambiar la imagen principal
+        function changeMainImage(imageUrl) {
+            var mainImage = document.getElementById('main-product-image');
+            mainImage.src = imageUrl;
+        }
+    </script>
+
+    <script>
+        let selectedVariantId = null;
+
+        // Función para seleccionar la talla
+        function selectSize(variantId, sizeTitle) {
+            selectedVariantId = variantId; // Guardar el ID de la variante seleccionada
+            const buttons = document.querySelectorAll('.size-button');
+            
+            // Quitar el estilo de selección de todos los botones
+            buttons.forEach(button => button.classList.remove('selected'));
+            
+            // Agregar el estilo de selección al botón clicado
+            const selectedButton = document.querySelector(`button[data-id='${variantId}']`);
+            selectedButton.classList.add('selected');
+            
+            // Actualizar el campo oculto del formulario con el ID de la variante seleccionada
+            document.getElementById('variant-id').value = variantId;
+            
+            // Activar el botón de "Añadir al carrito" solo si se seleccionó una talla
+            document.getElementById('add-to-cart-button').disabled = false;
+            
+            console.log(`Tamaño seleccionado: ${sizeTitle}`);
+        }
+
+        // Función para actualizar la cantidad
+        function updateQuantity(change) {
+            const quantityInput = document.getElementById('quantity-input');
+            let currentQuantity = parseInt(quantityInput.value);
+            currentQuantity += change;
+            if (currentQuantity < 1) currentQuantity = 1;  // No permitir cantidades negativas
+            if (currentQuantity > 10) currentQuantity = 10; // Límite de cantidad (puedes ajustarlo)
+            quantityInput.value = currentQuantity;
+            document.getElementById('hidden-quantity').value = currentQuantity; // Actualiza el valor oculto
+        }
+    </script>
+
+</body>
+

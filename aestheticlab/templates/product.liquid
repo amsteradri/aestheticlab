@@ -3,10 +3,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body style="background-image: url('{{ 'shop_background.png' | asset_url }}'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+<body style="background-color: rgb(255, 255, 255);">
 
     <div class="logo-container">
-        <img src="{{ 'al_logo.png' | asset_url }}" alt="Logo" class="logo">
+        <a href="/pages/tienda" title="Ir a la página principal">
+            <img src="{{ 'al_logo_negro.png' | asset_url }}" alt="Logo" class="logo">
+        </a>
     </div>
 
     <div class="product-details">
@@ -50,8 +52,15 @@
                             </button>
                         {% endif %}
                     {% endfor %}
+                </div>   
+                <button type="button" class="size-chart-button" onclick="showSizeChart()">Tabla de Tallas</button>
+                <div id="size-chart-popup" class="size-chart-popup" onclick="hideSizeChart(event)">
+                    <div class="size-chart-content">
+                        <img src="{{ 'tabla_de_tallas.png' | asset_url }}" alt="Tabla de Tallas">
+                    </div>
                 </div>
-            </div>
+                
+        </div>
 
             <!-- Contenedor para la cantidad, justo encima del precio -->
             <div class="quantity-container">
@@ -78,6 +87,16 @@
         function changeMainImage(imageUrl) {
             var mainImage = document.getElementById('main-product-image');
             mainImage.src = imageUrl;
+        }
+
+        function showSizeChart() {
+            document.getElementById('size-chart-popup').style.display = 'flex'; // Muestra el popup
+        }
+    
+        function hideSizeChart(event) {
+            if (event.target === document.getElementById('size-chart-popup')) {
+                document.getElementById('size-chart-popup').style.display = 'none'; // Oculta el popup al hacer clic fuera de la imagen
+            }
         }
     </script>
 

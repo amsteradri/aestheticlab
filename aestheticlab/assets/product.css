@@ -81,7 +81,7 @@
 .product-name {
     font-size: 2rem;
     font-weight: bold;
-    color: #ffffff;
+    color: #000000;
     margin-top: 0;
     margin-bottom: 10px;
     text-decoration: none;
@@ -95,7 +95,7 @@
 .product-material{
     font-size: 1rem !important; /* Igualamos el tamaño de la fuente al de .product-name */
     font-weight: bold !important;
-    color: #ffffff !important; /* Usamos !important para asegurarnos que el color sea el correcto */
+    color: #000000 !important; /* Usamos !important para asegurarnos que el color sea el correcto */
     margin-top: 0 !important;
     margin-bottom: 10px !important;
     text-decoration: none !important;
@@ -108,7 +108,7 @@
 }
 
 .product-description {
-    color: #ffffff !important; /* Usamos !important para asegurarnos que el color sea el correcto */
+    color: #000000 !important; /* Usamos !important para asegurarnos que el color sea el correcto */
 }
 
 /* Estilo de las opciones de tamaño */
@@ -120,7 +120,7 @@
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
-    color: #ffffff;
+    color: #000000;
     letter-spacing: 2px !important;
     text-transform: uppercase !important;
     font-family: 'Titillium Web', sans-serif !important; /* La misma fuente Titillium Web */
@@ -142,7 +142,7 @@
 /* Precio del producto */
 .product-price {
     font-size: 1.5rem;
-    color: #ffffff;
+    color: #000000;
     font-weight: bold;
     margin-bottom: 20px;
     letter-spacing: 2px !important;
@@ -155,7 +155,6 @@
 
 /* Botón de añadir al carrito */
 
-/* Botón de añadir al carrito */
 .add-to-cart-button {
     padding: 15px 30px;
     font-size: 1.2rem;
@@ -171,8 +170,17 @@
 /* Efecto hover para el botón */
 .add-to-cart-button:hover {
     color: #000000; /* Asegurar que el texto se quede negro */
-    outline: 2px solid #918f8f; /* Contorno negro fino */
+    outline: 2px solid #000000; /* Contorno negro fino */
     
+}
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 768px) {
+    .add-to-cart-button {
+        width: 100%;           /* Hace que el botón ocupe todo el ancho disponible */
+        padding: 10px 20px;    /* Reduce el padding para hacerlo más pequeño */
+        font-size: 1rem;       /* Reduce el tamaño de la fuente */
+    }
 }
 
 
@@ -236,7 +244,7 @@
         text-align: center;
         font-size: 1rem !important; /* Igualamos el tamaño de la fuente al de .product-name */
         font-weight: bold !important;
-        color: #ffffff !important; /* Usamos !important para asegurarnos que el color sea el correcto */
+        color: #000000 !important; /* Usamos !important para asegurarnos que el color sea el correcto */
         margin-top: 0 !important;
         margin-bottom: 10px !important;
         text-decoration: none !important;
@@ -265,17 +273,17 @@
     padding: 10px 20px;
     font-size: 1rem;
     background-color: #fff; /* Fondo blanco por defecto */
-    color: #333; /* Color de texto oscuro */
-    border: 2px solid #ddd; /* Borde gris claro */
-    border-radius: 2px;
+    color: #000000; /* Color de texto oscuro */
+    border: 2px solid #ffffff; /* Borde gris claro */
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, border 0.3s ease;
 }
 
 /* Estilo al pasar el mouse por encima */
 .size-button:hover {
-    background-color: #f0f0f0; /* Fondo gris claro al pasar el ratón */
-    outline: 2px solid #918f8f;
+    background-color: #ffffff; /* Fondo gris claro al pasar el ratón */
+    outline: 2px solid #000000;
 }
 
 /* Estilo para las tallas fuera de stock */
@@ -289,12 +297,12 @@
 .size-button:disabled {
     pointer-events: none; /* Deshabilita los clics */
     background-color: #ccc; /* Color gris */
-    border: 2px solid #aaa; /* Borde gris más oscuro */
+    border: 2px solid #ffffff; /* Borde gris más oscuro */
 }
 
 /* Estilo para el botón seleccionado */
 .size-button.selected {
-    outline: 2px solid #ffcc00; /* Outline amarillo cuando se selecciona el botón */
+    outline: 2px solid #000000; /* Outline amarillo cuando se selecciona el botón */
     
     background-color: #fff; /* Fondo blanco cuando está seleccionado */
 }
@@ -317,25 +325,27 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-right: 5px; /* Separar ligeramente los botones */
-    border-radius: 10px; /* Redondear las esquinas de los botones */
+    border-radius: 6px; /* Redondear las esquinas de los botones */
 }
 
 .quantity-button:hover {
-    background-color: #ffeb3b; /* Amarillo suave */
+    background-color: #dcdcdc; /* Amarillo suave */
 }
 
 /* Estilo para el campo de cantidad */
 #quantity-input {
-    width: 40px; /* Reducir el tamaño del campo de cantidad */
+    width: 35px;           /* Ancho del campo de cantidad */
+    height: 30px;          /* Altura del campo de cantidad */
     text-align: center;
-    font-size: 1rem; /* Reducir el tamaño de la fuente */
-    margin: 0 5px; /* Separar ligeramente el campo de cantidad de los botones */
-    border: 1px solid #000; /* Borde alrededor del campo */
-    border-radius: 0; /* Sin redondear las esquinas */
-    -moz-appearance: textfield; /* Eliminar las flechas en Firefox */
-    -webkit-appearance: none; /* Eliminar las flechas en Chrome/Safari */
-    appearance: none; /* Eliminar las flechas en otros navegadores */
+    font-size: 1rem;       /* Tamaño de la fuente */
+    margin: 0 5px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    appearance: none;
 }
+
 
 /* Para eliminar las flechas del campo input en algunos navegadores */
 #quantity-input::-webkit-outer-spin-button,
@@ -343,6 +353,28 @@
     -webkit-appearance: none;
     margin: 0;
 }
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+    .quantity-container {
+        /* Aseguramos que los elementos se mantengan en una fila en dispositivos móviles */
+        flex-direction: row; /* Alinea los botones y el campo en una fila */
+        align-items: center; /* Alinea los elementos verticalmente */
+        justify-content: center; /* Centra los elementos */
+    }
+
+    .quantity-button {
+        width: 30px; /* Ajusta el tamaño de los botones */
+        height: 30px; /* Ajusta la altura de los botones */
+    }
+
+    #quantity-input {
+        width: 50px; /* Ajusta el tamaño del input para que sea más visible */
+        height: 30px; /* Asegura que el campo de cantidad sea de una altura cómoda */
+    }
+}
+
+
 
 /* Estilo para el contenedor del logo */
 .logo-container {
@@ -359,3 +391,64 @@
 }
 
 
+/* Estilos para el botón de Tabla de Tallas */
+.size-chart-button {
+    background-color: #ffffff; /* Color de fondo azul */
+    color: rgb(0, 0, 0); /* Color del texto */
+    font-size: 13px; /* Tamaño de la fuente */
+    font-weight: 600; /* Peso de la fuente */
+    padding: 10px 20px; /* Espaciado dentro del botón */
+    border: 1px solid #000;
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Indicador de cursor al pasar sobre el botón */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+    margin-top: 10px; /* Espaciado superior */
+}
+
+.size-chart-button:hover {
+    background-color: #0056b3; /* Color de fondo más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Efecto de aumento */
+}
+
+.size-chart-button:focus {
+    outline: none; /* Elimina el borde azul cuando está enfocado */
+}
+
+/* Estilos para la ventana emergente (popup) */
+.size-chart-popup {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
+    justify-content: center; /* Centra el contenido */
+    align-items: center; /* Centra verticalmente */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+/* Estilos del contenido del popup (imagen) */
+.size-chart-content {
+    position: relative;
+    background-color: #fff; /* Fondo blanco */
+    padding: 20px; /* Espaciado alrededor de la imagen */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para el contenido */
+}
+
+.size-chart-content img {
+    max-width: 90%; /* Asegura que la imagen no exceda el ancho de la pantalla */
+    max-height: 90%; /* Asegura que la imagen no exceda la altura de la pantalla */
+    border-radius: 10px; /* Redondear las esquinas de la imagen */
+}
+
+/* Estilos de cierre del popup: cuando se hace clic fuera de la caja, el popup se oculta */
+.size-chart-popup.show {
+    display: flex;
+}
+
+/* Estilos para el área detrás de la imagen para hacerla clickeable */
+.size-chart-popup .size-chart-content {
+    cursor: pointer; /* Apunta que la imagen es interactiva */
+}

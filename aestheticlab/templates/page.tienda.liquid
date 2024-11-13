@@ -16,41 +16,43 @@
         {{ content_for_header }}
     </head>
     <body>
-        <div id="tienda" style="min-height: 100vh; width: 100%; background-color: rgba(0, 0, 0, 0.8); background-image: url('{{ "shop_background.png" | asset_url }}'); background-position: center; background-size: cover; background-repeat: no-repeat; padding: 70px 20px; position: relative;">
+        <div id="tienda" style="min-height: 100vh; width: 100%; background-color: rgb(255, 255, 255); background-position: center; background-size: cover; background-repeat: no-repeat; padding: 70px 20px; position: relative;">
 
             <div class="tienda-logo">
-                <img src="{{ 'al_logo.png' | asset_url }}" alt="Logo de Tienda" style="max-width: 300px;">
+                <img src="{{ 'al_logo_negro.png' | asset_url }}" alt="Logo de Tienda" style="max-width: 300px;">
             </div>
         
         
             <div class="menu-container">
                 <div class="menu">
-                    <a href="#" class="bold" onclick="showSection('tienda-content'); return false;">Tienda</a>
-                    <a href="#" class="bold" onclick="showSection('quienes-somos-content'); return false;">Quienes Somos</a>
-                    <a href="#" class="bold" onclick="showSection('contacto-content'); return false;">Contacto</a>
                     <a href="/cart" class="bold cart-link">
-                        <span>Carrito</span>
-                        <span class="material-icons-outlined cart-icon">shopping_cart</span>
                         {% if cart.item_count > 0 %}
-                            <span class="cart-count">{{ cart.item_count }}</span>
+                            <span class="cart-count">({{ cart.item_count }})</span>
+                        {% else %}
+                            <span class="cart-count">0 items</span>
                         {% endif %}
+                        <img src="{{ 'shopping-cart.png' | asset_url }}" alt="Carrito" class="cart-icon">
                     </a>
                 </div>
+                
             </div>
+            
             
             <div id="sections-container">
                 <div id="tienda-content" class="section-content">
                     <div class="productos">
-                      {% for product in collections['essential-drop'].products %}
-                        <a href="{{ product.url }}" class="producto-container">
-                          <div class="imagen-container">
-                            <img class="imagen-frontal" src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }} Front">
-                            <img class="imagen-trasera" src="{{ product.images[1] | img_url: 'medium' }}" alt="{{ product.title }} Back">
+                        {% for product in collections['essential-drop'].products %}
+                          <div class="producto-container">
+                            <a href="{{ product.url }}" class="imagen-container">
+                                <img class="imagen-frontal" src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }} Front">
+                                <img class="imagen-trasera" src="{{ product.images[1] | img_url: 'large' }}" alt="{{ product.title }} Back">
+                                
+                            </a>
+                            <div class="producto-nombre">{{ product.title }}</div> <!-- El nombre ahora está fuera del enlace -->
+                            <div class="producto-precio">{{ product.price | money }}</div>
                           </div>
-                          <div class="producto-nombre">{{ product.title }}</div>
-                        </a>
-                      {% endfor %}
-                    </div>
+                        {% endfor %}
+                      </div>                      
                   </div>
                   
                 
@@ -148,29 +150,24 @@
                         const cartCount = data.item_count;
                         const cartCountElement = document.querySelector('.cart-count');
                         const cartLink = document.querySelector('.cart-link');
-        
-                        if (cartCount > 0) {
-                            if (cartCountElement) {
-                                cartCountElement.textContent = cartCount;
-                            } else {
-                                const newCartCount = document.createElement('span');
-                                newCartCount.className = 'cart-count';
-                                newCartCount.textContent = cartCount;
-                                cartLink.appendChild(newCartCount);
-                            }
+            
+                        if (cartCountElement) {
+                            cartCountElement.textContent = `(${cartCount})`;
                         } else {
-                            if (cartCountElement) {
-                                cartCountElement.remove();
-                            }
+                            const newCartCount = document.createElement('span');
+                            newCartCount.className = 'cart-count';
+                            newCartCount.textContent = `${cartCount} items`;
+                            cartLink.insertBefore(newCartCount, cartLink.firstChild);
                         }
                     })
                     .catch(error => console.error('Error actualizando el carrito:', error));
             }
+            
         
             window.addEventListener('load', updateCartCount);
         </script>
     
-        <footer class="footer" style="background-image: url('{{ "footer.png" | asset_url }}');">
+        <footer class="footer">
             <p class="footer-text">"La moda es arte en movimiento" — Desarrollado por Adrián Gutiérrez. — Para Aestheticlab</p>
             <div class="footer-links">
                 <a href="https://www.instagram.com/aestheticlab.official/" target="_blank">Instagram</a> |

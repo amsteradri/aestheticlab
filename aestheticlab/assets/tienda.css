@@ -1,544 +1,492 @@
 /* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body, html {
-    width: 100%;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: #000;
-  }
-
-/* Estilos generales para la sección Tienda */
-#tienda {
-    min-height: 100vh;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    background-image: url('/assets/shop_background.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding: 20px 20px;
-    position: relative;
-    z-index: 2;
-  }
-  
-  /* Logo de la tienda */
-/* Contenedor del logo */
-.tienda-logo {
-    display: flex;
-    justify-content: center;
-    opacity: 0;
-    animation: quickDrop 0.6s cubic-bezier(0.2, 1, 0.2, 1) forwards;
-    animation-delay: 1.5s; /* El logo aparece después de 2.5 segundos */
-  }
-  
-  .tienda-logo img {
-    width: 500px;
-    height: auto;
-  }
-  
-  /* Menú principal de navegación */
-  .menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 50px;
-  }
-  
-  .menu a {
-    color: rgb(183, 178, 178);
-    text-decoration: none;
-    font-size: 2vw;
-    letter-spacing: 0.2vw;
-    text-transform: uppercase;
-    font-family: 'Titillium Web', sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transform: scaleY(0.7);
-  }
-  
-  .menu a.active {
-    color: #f5f5dc;
-  }
-  
-  .menu a.bold {
-    font-weight: 900;
-  }
-  
-  .menu a.cart-link {
-    display: flex;
-    align-items: center;
-  }
-  
-  .menu .cart-icon {
-    width: 24px;
-    height: 24px;
-    transform: scaleY(1.43);
-  }
-  
-  .menu .cart-count {
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.8vw;
-    transform: scaleY(1.43);
-    margin-left: 5px;
-  }
-  
-  /* Productos */
- /* Ajustar el ancho del contenedor del producto */
-.producto-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 22vw; /* Aumentar el ancho para dar más espacio al nombre */
-    max-width: 300px; /* Limitar el ancho máximo */
-    margin-bottom: 30px;
-    margin-top: 60px;
-    text-align: center; /* Centrar el texto dentro de cada producto */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Ajustar el espacio y centrar los productos */
+html {
+  scroll-behavior: smooth;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #000;
+}
+
+/* Contenedor de la sección de tienda */
+#tienda {
+  min-height: 100vh;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  background-image: url('/assets/shop_background.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo de la tienda */
+.tienda-logo {
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  animation: quickDrop 0.6s cubic-bezier(0.2, 1, 0.2, 1) forwards;
+  animation-delay: 1.5s;
+}
+
+.tienda-logo img {
+  width: 500px;
+  height: auto;
+}
+
+/* Contenedor principal del menú */
+.menu-container {
+  display: flex;
+  justify-content: flex-end; /* Alinear a la derecha */
+  padding: 20px;
+  margin-right: 200px;
+  color: #000;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+/* Estilos para los enlaces del menú */
+.menu a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 1.5vw;
+  text-transform: uppercase;
+  font-family: 'Titillium Web', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: scaleY(0.7);
+}
+
+.menu a.active {
+  color: #000000;
+}
+
+.menu a.bold {
+  font-weight: 900;
+}
+
+/* Carrito de compras en el menú */
+.menu a.cart-link {
+  display: flex;
+  align-items: center;
+  position: relative; /* Necesario para el contador */
+  color: #000000;
+  gap: 1px; /* Reduce el espacio entre el contador y el icono */
+  padding-right: 1vw; /* Ajusta el espaciado a la derecha si es necesario */
+}
+
+/* Icono y contador del carrito */
+.menu .cart-icon {
+  width: 30px;
+  height: 37px;
+  vertical-align: middle;
+  order: 1; /* Coloca el icono en primer lugar */
+}
+
+/* Estilos generales para cart-count */
+.cart-count {
+  color: #000000;         /* Color del texto */
+  font-size: 2.1vw;       /* Tamaño de texto responsive */
+  margin-right: 0px;      /* Espacio entre el número de items y el ícono */
+  display: inline-block;  /* Asegura que el elemento siempre sea visible */
+  font-weight: bold;      /* Hace el texto más visible */
+  line-height: 1.2;       /* Ajusta el espacio vertical del texto */
+  min-width: 30px;        /* Ancho mínimo para mantener el tamaño */
+  text-align: center;     /* Centra el número de items */
+  order: 2; /* Coloca el contador después del icono */
+}
+
+/* Ajustes específicos para resoluciones grandes */
+@media (min-width: 1440px) {
+  .cart-count {
+    font-size: 1.2vw;     /* Tamaño reducido en pantallas muy grandes */
+  }
+}
+
+/* Ajustes para tablets y pantallas medianas */
+
+@media (max-width: 1024px) {
+  .cart-count {
+    font-size: 2.5vw;       /* Tamaño de texto más grande para tablets */
+  }
+}
+
+/* Ajustes para móviles */
+@media (max-width: 767px) {
+  .cart-count {
+    font-size: 5vw;       /* Tamaño de texto más grande para móviles */
+  }
+}
+
+/* Contenedor de los productos */
 .productos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Cuatro productos por fila */
+  gap: 150px; /* Espaciado entre productos */
+  justify-items: center; /* Centrar los productos */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estilos para cada producto */
+.producto-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 250px; /* Ancho máximo de cada producto */
+  text-align: center;
+}
+
+/* Producto nombre */
+.producto-nombre {
+  margin-top: 5px;
+  font-size: 2.5vw;
+  color: rgb(0, 0, 0);
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+  transform: scaleY(0.7);
+  text-align: center;
+  white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+  word-wrap: break-word; /* Fuerza al texto a romperse y ajustarse dentro del contenedor */
+  overflow-wrap: break-word; /* Garantiza que las palabras largas no se salgan del contenedor */
+  line-height: 1.2; /* Ajusta la altura de la línea para una mejor separación */
+}
+
+/* Estilos básicos para el precio del producto */
+.producto-precio {
+  font-size: 1vw;           /* Tamaño de fuente responsive */
+  font-weight: bold;
+  color: #000000;           /* Color rojo oscuro para resaltar */
+  font-family: 'Arial', sans-serif; /* Fuente clara y legible */
+  text-align: center;       /* Centra el precio dentro del contenedor */
+  margin-top: 10px;         /* Espacio superior para separación */
+  margin-bottom: 5px;       /* Espacio inferior para separación */
+  padding: 5px 10px;        /* Espaciado interno para mejorar la legibilidad */
+  border-radius: 8px;       /* Bordes redondeados */
+}
+
+
+
+/* Imagen del producto */
+.imagen-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 20vw;
+  max-height: 400px;
+}
+
+/* Estilos para la imagen del producto */
+.imagen-container img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Ajustes para pantallas grandes */
+
+
+@media (min-width: 2560px) {
+  /* Ajuste en el contenedor de los productos */
+  .productos {
+    grid-template-columns: repeat(4, 1fr); /* 4 productos por fila */
+    gap: 15px; /* Espacio aún más reducido entre productos */
+    margin-left: 20px; /* Ajuste del margen izquierdo */
+    margin-right: 20px; /* Ajuste del margen derecho */
+  }
+
+  /* Ajustes para cada contenedor de producto */
+  .producto-container {
+    width: 400px; /* Reducción aún mayor del ancho de los productos */
+    height: 550px; /* Reducción adicional de la altura */
+    margin-left: 160px;
+    margin-top: 130px;
+    max-width: 100%; /* Asegura que el contenedor no se desborde */
+  }
+
+  /* Ajuste en el nombre del producto */
+  .producto-nombre {
+    font-size: 1.3vw; /* Ajuste más pequeño para pantallas grandes */
+  }
+
+  /* Ajuste en el precio del producto */
+  .producto-precio {
+    font-size: 1vw; /* Reducción de tamaño para el precio */
+  }
+
+  /* Ajustes para la imagen del producto */
+  .imagen-container {
+    height: 16vw; /* Reducción aún mayor de la altura de las imágenes */
+    max-height: 360px; /* Limitar la altura máxima */
+    width: 100%; /* La imagen ocupa el 100% del contenedor */
+  }
+
+  .imagen-container img {
+    width: 100%; /* Asegura que la imagen se ajuste al contenedor */
+    height: 100%; /* Asegura que la imagen ocupe todo el alto del contenedor */
+    object-fit: cover; /* Hace que la imagen cubra todo el espacio sin deformarse */
+  }
+
+  /* Estilo para los botones */
+  .agregar-al-carrito {
+    padding: 6px 16px; /* Ajuste de tamaño del botón */
+    font-size: 1vw; /* Ajuste del tamaño de fuente */
+  }
+}
+
+@media (max-width: 1920px) {
+  /* Ajuste en el contenedor de los productos */
+  .productos {
+    grid-template-columns: repeat(4, 1fr); /* 4 productos por fila */
+    gap: 10px; /* Espacio reducido entre productos */
+    margin-left: 20px; /* Ajuste del margen izquierdo */
+    margin-right: 20px; /* Ajuste del margen derecho */
+    margin-top: 30px;
+  }
+
+  /* Ajustes para cada contenedor de producto */
+  .producto-container {
+    width: 380px; /* Reducción del ancho de los productos */
+    height: 540px; /* Reducción de la altura */
+    max-width: 100%; /* Asegura que el contenedor no se desborde */
+    margin-left: 50px;
+  }
+
+  /* Ajuste en el nombre del producto */
+  .producto-nombre {
+    font-size: 1.3vw; /* Ajuste más pequeño para pantallas grandes */
+  }
+
+  /* Ajuste en el precio del producto */
+  .producto-precio {
+    font-size: 1vw; /* Reducción de tamaño para el precio */
+  }
+
+  /* Ajustes para la imagen del producto */
+  .imagen-container {
+    height: 17vw; /* Reducción de la altura de las imágenes */
+    max-height: 350px; /* Limitar la altura máxima */
+    width: 100%; /* La imagen ocupa el 100% del contenedor */
+  }
+
+  .imagen-container img {
+    width: 100%; /* Asegura que la imagen se ajuste al contenedor */
+    height: 100%; /* Asegura que la imagen ocupe todo el alto del contenedor */
+    object-fit: cover; /* Hace que la imagen cubra todo el espacio sin deformarse */
+  }
+
+  /* Estilo para los botones */
+  .agregar-al-carrito {
+    padding: 6px 16px; /* Ajuste de tamaño del botón */
+    font-size: 1vw; /* Ajuste del tamaño de fuente */
+  }
+}
+
+
+
+@media (max-width: 767px) {
+  .menu { 
+    flex-wrap: wrap; 
+    gap: 20px; 
+  }
+  .menu a { 
+    font-size: 18px; 
+  }
+  .tienda-logo img { 
+    width: 300px; 
+  }
+
+  .producto-container {
+    width: 95vw;
+    max-width: 400px;
+    margin: 0;
+    height: 440px;
+  }
+
+  .imagen-container {
+    height: 340px;
+    width: 100%;
+  }
+
+  .productos {
     display: flex;
-    gap: 90px; /* Espacio de 90px entre los productos */
-    justify-content: center; /* Centrar los productos */
+    gap: 90px;
+    row-gap: 20px;
+    justify-content: center;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 1200px; /* Limitar el ancho máximo de la fila */
-    margin: 0 auto; /* Centrar el contenedor de productos */
-}
-
-/* Ajustar el nombre del producto */
-.producto-nombre {
-    margin-top: 5px;
-    font-size: 2.5vw;
-    color: rgb(235, 233, 233);
-    font-family: 'Titillium Web', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    display: inline-block;
-    transform: scaleY(0.7);
-    text-align: center;
-    white-space: nowrap; /* Evitar que el nombre se divida en dos líneas */
-}
-
-
-  
-  .imagen-container {
-    width: 120%;
-    position: relative;
-    overflow: hidden;
-    height: 30vw;
-    max-height: 400px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
-  
-  .imagen-container img {
-    width: 100%;
+
+  .producto-nombre {
+    font-size: 20px;
+    line-height: 1.2;
+    white-space: normal;
+    text-align: center;
     height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: opacity 0.5s ease;
-  }
-  
-  .imagen-frontal {
-    opacity: 1;
-  }
-  
-  .imagen-trasera {
-    opacity: 0;
-  }
-  
-  .imagen-container:hover .imagen-frontal {
-    opacity: 0;
-  }
-  
-  .imagen-container:hover .imagen-trasera {
-    opacity: 1;
-  }
-  
-  /* Ajustar el nombre del producto */
-  
-  .productos a.producto-container {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 18vw;
-    max-width: 250px;
-    margin-bottom: 30px;
-  }
-  
-  /* Media Queries */
-  @media (min-width: 1440px) {
-    .menu a {
-      font-size: 36px;
-    }
-  
-    .tienda-logo {
-      margin-bottom: 10px;
-    }
-    
-    .tienda-logo img {
-      width: 700px;
-      
-    }
-  
-    .producto-nombre {
-      font-size: 30px;
-    }
-  
-    .imagen-container {
-      height: 360px;
-    }
+    margin-bottom: 2px; /* Reduce espacio entre nombre y precio */
   }
 
-/* Media Queries */
-@media (max-width: 1080px) {
-    .menu a {
-        font-size: 36px;
-    }
-    
-    .tienda-logo img {
-        width: 700px;
-    }
-    
-    .producto-nombre {
-        font-size: 30px;
-    }
-    
-    .imagen-container {
-        height: 330px;
-        width: 100%;
-    }
-    .imagen-container img {
-        width: 100%;
-        height: auto;
-        position: absolute;
-        top: 0;
-        left: 0;
-        transition: opacity 0.5s ease;
-      }
-}
-  
-  @media (max-width: 1024px) {
-    .menu a {
-      font-size: 18px;
-    }
-  
-    .tienda-logo img {
-      width: 400px;
-    }
-  
-    .producto-nombre {
-      font-size: 20px;
-    }
-  
-    .imagen-container {
-      height: 25vw;
-      max-height: 260px;
-    }
-  }
-  
-  @media (max-width: 767px) {
-    .menu {
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-  
-    .menu a {
-      font-size: 18px;
-    }
-  
-    .tienda-logo img {
-      width: 300px;
-    }
-  
-    .producto-container {
-        width: 95vw;
-        max-width: 400px;
-        margin-bottom: 0px; /* Reducir el espacio entre filas */
-        margin-top: 0px; /* Reducir espacio vertical para ajustar mejor */
-    }
-
-    .imagen-container {
-        height: 120px; /* Ajustar la altura de las imágenes para reducir el espacio */
-        width: 160%;
-    }
-
-    .productos {
-        display: flex;
-        gap: 90px; /* Mantiene 90px entre productos horizontalmente */
-        row-gap: 20px; /* Ajusta este valor para reducir el espacio entre filas */
-        justify-content: center;
-        flex-wrap: wrap;
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-
-    .producto-nombre {
-        font-size: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        line-height: 1.2;
-        white-space: normal;
-        min-height: 2.4em; /* Asegurar altura para dos líneas */
-        text-align: center;
-    }
-  
-    .menu .cart-count {
-      font-size: 10px;
-    }
-  }
-  
-  /* Footer */
-.footer {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #f5f5dc;
+  .producto-precio {
+    margin: 0; /* Elimina márgenes */
+    font-size: 4vw; /* Tamaño adaptado para pantallas pequeñas */
     text-align: center;
-    padding: 20px;
-    font-size: 16px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Estilos para el texto y los enlaces del footer */
-  .footer-text {
-    margin-bottom: 10px;
-    font-weight: bold;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-  }
-  
-  .footer-links a {
-    color: #f5f5dc;
-    text-decoration: none;
-    margin: 0 5px;
-    font-size: 14px;
-    transition: color 0.3s ease;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-  }
-  
-  .footer-links a:hover {
-    color: #ddd;
-  }
-  
-  /* Ajustes para móviles */
-  @media (max-width: 767px) {
-    .footer {
-        font-size: 14px;
-        padding: 15px;
-    }
-  
-    .footer-links a {
-        font-size: 12px;
-    }
   }
 
-  /* Animación de deslizamiento desde abajo para los productos */
+  .menu a.cart-link {
+    padding-right: 5vw; /* Espacio adicional para el enlace del carrito */
+  }
+
+  .menu-container {
+    margin-right: 10px;
+    justify-content: flex-end;
+  }
+
+  .menu {
+    justify-content: flex-end;
+  }
+}
+
+
+
+.imagen-frontal {
+  opacity: 1;
+}
+
+.imagen-trasera {
+  opacity: 0;
+}
+
+.imagen-container:hover .imagen-frontal {
+  opacity: 0;
+}
+
+.imagen-container:hover .imagen-trasera {
+  opacity: 1;
+}
+
+/* Media Queries para asegurar la correcta disposición en pantallas pequeñas */
+@media (max-width: 1200px) {
+  .productos {
+      grid-template-columns: repeat(3, 1fr); /* 3 productos por fila en pantallas medianas */
+  }
+}
+
+@media (max-width: 1024px) {
+  .productos {
+      grid-template-columns: repeat(2, 1fr); /* 2 productos por fila en pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 767px) {
+  .productos {
+      grid-template-columns: 1fr; /* 1 producto por fila en pantallas móviles */
+  }
+  
+}
+
+/* Animaciones para productos */
 @keyframes slideInFromBottom {
-    from {
+  from {
       opacity: 0;
       transform: translateY(60px);
-    }
-    to {
+  }
+  to {
       opacity: 1;
       transform: translateY(0);
-    }
   }
-  
-/* Animación de difuminado para los elementos del menú */
+}
+
 @keyframes fadeIn {
-    from {
+  from {
       opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
   }
-  
-/* Animación de caída rápida desde arriba */
+  to {
+      opacity: 1;
+  }
+}
+
 @keyframes quickDrop {
-    0% {
+  0% {
       opacity: 0;
       transform: translateY(-200px);
-    }
-    100% {
+  }
+  100% {
       opacity: 1;
       transform: translateY(0);
-    }
   }
-  
-  /* Aplicar la animación a los productos, con velocidad reducida */
-  .producto-container {
-    opacity: 0;
-    animation: slideInFromBottom 1.2s ease-out forwards;
-  }
-  
-  .producto-container:nth-child(1) {
-    animation-delay: 0.3s;
-  }
-  .producto-container:nth-child(2) {
-    animation-delay: 0.5s;
-  }
-  .producto-container:nth-child(3) {
-    animation-delay: 0.7s;
-  }
-  .producto-container:nth-child(4) {
-    animation-delay: 0.9s;
-  }
-  
-/* Aplicar la animación de difuminado a los elementos del menú */
-.menu a {
-    opacity: 0;
-    animation: fadeIn 1.5s ease-out forwards;
-  }
-  
-  .menu a:nth-child(1) {
-    animation-delay: 0.5s;
-  }
-  .menu a:nth-child(2) {
-    animation-delay: 0.7s;
-  }
-  .menu a:nth-child(3) {
-    animation-delay: 0.9s;
-  }
-  .menu a:nth-child(4) {
-    animation-delay: 1.1s;
-  }
-  
-  /* El carrito aparece al final */
-  .menu a.cart-link {
-    animation-delay: 1.5s; /* Mayor delay para que aparezca al final */
-  }
-
-
-/* QUIENES SOMOS*/
-.quienes-somos-container {
-    text-align: center;
-    color: #f5f5dc;
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
 }
 
-.quienes-somos-container h2 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    color: #f5f5dc;
+.producto-container {
+  opacity: 0;
+  animation: slideInFromBottom 1.2s ease-out forwards;
 }
 
-.quienes-somos-container p {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    line-height: 1.6;
+.producto-container:nth-child(1) { animation-delay: 0.3s; }
+.producto-container:nth-child(2) { animation-delay: 0.5s; }
+.producto-container:nth-child(3) { animation-delay: 0.7s; }
+.producto-container:nth-child(4) { animation-delay: 0.9s; }
+
+/* Footer */
+.footer {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(42, 42, 42, 0.8);
+  color: #c3c3bd;
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Estilos para la sección de socios */
-.socios {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin: 20px 0;
+.footer-text {
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
-.socio {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.footer-links a {
+  color: #f5f5dc;
+  text-decoration: none;
+  margin: 0 5px;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
-.socio-imagen {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border: 3px solid #ffffff;
+.footer-links a:hover {
+  color: #ddd;
 }
 
-.socio-nombre {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-/* Estilos para los valores de la marca */
-.valores {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.valor {
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    color: #ffffff;
-}
-
-.valor h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.valor p {
-    font-size: 1em;
-    line-height: 1.5;
-}
-
-/* Adaptación para pantallas más pequeñas */
-@media (max-width: 767px) {
-    .socios {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .valores {
-        gap: 10px;
-    }
-    
-    .valor {
-        padding: 10px;
-    }
-    
-    .quienes-somos-container h2 {
-        font-size: 2em;
-    }
-    
-    .quienes-somos-container p,
-    .valor p {
-        font-size: 1em;
-    }
-}
-
-  
-
-
-  

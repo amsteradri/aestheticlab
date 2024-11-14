@@ -11,61 +11,51 @@
   
   </head>
   
-  <body style="background-image: url('{{ 'al_background.png' | asset_url }}'); background-size: cover; background-position: center center;">
+  <body style="background-color: rgb(255, 255, 255);">
     
   
     <div class="cart-container" id="cartContainer">
-      <img src="{{ 'al_logo.png' | asset_url }}" alt="Brand Logo" class="brand-logo">
-      <div class="cart-header">
-        <h1>Your Cart</h1>
-      </div>
+
+      <a href="/pages/tienda" title="Ir a la página principal">
+        <img src="{{ 'al_logo_negro.png' | asset_url }}" alt="Brand Logo" class="brand-logo">
+      </a>
   
       <form action="/cart" method="post" novalidate id="cart-form">
-        <table>
-          <thead>
-            <tr>
-              <th colspan="2">Product</th>
-              <th>Price</th>
-              <th>Qty</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in cart.items %}
-              <tr>
-                <td>
-                  <a href="{{ item.url | within: collections.all }}">
-                    <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
-                  </a>
-                </td>
-                <td>
-                  <a href="{{ item.url }}">{{ item.product.title }}</a>
-                  {% if item.variant.title != "Default Title" %}
-                    <br> {{ item.variant.title }}
-                  {% endif %}
-                  <br>
-                  <a href="/cart/change?line={{ forloop.index }}&quantity=0">remove</a>
-                </td>
-                <td>{{ item.price | money }}</td>
-                <td>
-                  <div class="quantity-control">
-                    <button type="button" class="quantity-btn minus" data-line="{{ forloop.index }}" data-id="{{ item.variant.id }}">-</button>
-                    <input type="number" class="cart-quantity" value="{{ item.quantity }}" min="0" step="1" 
-                           data-line="{{ forloop.index }}" data-id="{{ item.variant.id }}" 
-                           data-stock="{{ item.variant.inventory_quantity }}">
-                    <button type="button" class="quantity-btn plus" data-line="{{ forloop.index }}" data-id="{{ item.variant.id }}">+</button>
-                  </div>
-                </td>
-                <td>
-                  {% if item.original_line_price != item.line_price %}
-                    <span style="text-decoration: line-through;">{{ item.original_line_price | money }}</span>
-                  {% endif %}
-                  <span class="line-total">{{ item.line_price | money }}</span>
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        <div class="cart-items">
+          {% for item in cart.items %}
+            <div class="cart-item">
+              <!-- Imagen del producto -->
+              <div class="item-image">
+                <a href="{{ item.url | within: collections.all }}">
+                  <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                </a>
+              </div>
+        
+              <!-- Detalles del producto -->
+              <div class="item-details">
+                <a href="{{ item.url }}" class="item-title">{{ item.product.title }}</a>
+                {% if item.variant.title != "Default Title" %}
+                  <p class="item-variant">{{ item.variant.title }}</p>
+                {% endif %}
+                <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="remove-link">Eliminar</a>
+              </div>
+        
+              <!-- Precio y cantidad del producto -->
+              <div class="item-pricing">
+                <p class="item-price" data-price="{{ item.price | money_without_currency }}">{{ item.price | money }}</p>
+                <span class="line-total">{{ item.price | money }}</span>
+
+                <div class="quantity-control">
+                  <button type="button" class="quantity-btn minus" data-line="{{ forloop.index }}" data-id="{{ item.variant.id }}">-</button>
+                  <input type="number" class="cart-quantity" value="{{ item.quantity }}" min="0" step="1" 
+                         data-line="{{ forloop.index }}" data-id="{{ item.variant.id }}" 
+                         data-stock="{{ item.variant.inventory_quantity }}">
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        
   
         <div class="totals-container">
           <div class="subtotal-container">
@@ -74,12 +64,12 @@
           </div>
   
           <div class="shipping-container">
-            <p>Shipping:</p>
-            <p class="total" id="shipping">Free Shipping</p>
+            <p>Envío:</p>
+            <p class="total" id="shipping">2-5€</p>
           </div>
   
           <div class="grand-total-container">
-            <p><strong>Grand Total:</strong></p>
+            <p><strong>Total:</strong></p>
             <p class="grand-total" id="grand-total">{{ cart.total_price | money }}</p>
           </div>
         </div>
@@ -92,9 +82,15 @@
     </div>
   
     <div class="cart-empty" id="emptyCartContainer">
-      <h2>Your cart is empty</h2>
+      
+      <h2 style="letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        font-family: 'Titillium Web', sans-serif !important; /* La misma fuente Titillium Web */
+        display: block !important; /* Cambiado de inline-block a block */
+        transform: scaleY(0.7) !important; /* Aplana el texto verticalmente al 90% de su altura */
+        line-height: 1.6 !important; /* Mantener la propiedad de line-height */ /* Usamos !important para asegurarnos que el color sea el correcto */">El carrito esta vacío</h2>
       <div class="back-to-store">
-        <a href="/pages/tienda" class="back-button">Back to Store</a>
+        <a href="/pages/tienda" class="back-button-empty">Vuelve a la tienda</a>
       </div>
     </div>
   
@@ -108,143 +104,108 @@
   
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Utility function to format money values
+        // Formatear valores de dinero para mostrar en el carrito
         function formatMoney(amount) {
-          return '$' + (amount / 100).toFixed(2); // Divide by 100 to convert cents to dollars
+          return amount.toFixed(2) + '€';
         }
       
-        // Function to update cart state
+        // Función para actualizar el estado del carrito
         function updateCartState() {
           let totalQuantity = 0;
           let subtotal = 0;
-          const quantityInputs = document.querySelectorAll('.cart-quantity');
-          
-          quantityInputs.forEach(input => {
-            const quantity = parseInt(input.value) || 0;
-            totalQuantity += quantity;
+      
+          // Recorre cada elemento del carrito y recalcula subtotales
+          document.querySelectorAll('.cart-item').forEach(item => {
+            const quantityInput = item.querySelector('.cart-quantity');
+            const quantity = parseInt(quantityInput.value) || 0;
             
-            // Calculate line total
-            const price = parseFloat(input.closest('tr').querySelector('td:nth-child(3)').textContent.replace(/[^0-9.]/g, ''));
+            // Usa el precio de la prenda en el atributo `data-price` como base para el cálculo
+            const price = parseFloat(item.querySelector('.item-price').dataset.price); 
+            
+            // Calcula el total de la línea para ese producto
             const lineTotal = price * quantity;
-            input.closest('tr').querySelector('.line-total').textContent = formatMoney(lineTotal); // No multiplication by 100 here!
-            
+            item.querySelector('.line-total').textContent = formatMoney(lineTotal);
+      
+            // Actualiza los totales
+            totalQuantity += quantity;
             subtotal += lineTotal;
           });
       
-          // Update subtotal and grand total
-          document.getElementById('subtotal').textContent = formatMoney(subtotal); // No multiplication by 100 here!
-          document.getElementById('grand-total').textContent = formatMoney(subtotal); // No multiplication by 100 here!
+          // Actualiza el subtotal y el total general en el carrito
+          document.getElementById('subtotal').textContent = formatMoney(subtotal);
+          document.getElementById('grand-total').textContent = formatMoney(subtotal);
       
-          // Show/hide empty cart message
-          const cartContainer = document.getElementById('cartContainer');
-          const emptyCartContainer = document.getElementById('emptyCartContainer');
-      
+          // Muestra o esconde el mensaje de carrito vacío
           if (totalQuantity === 0) {
-            cartContainer.style.display = 'none';
-            emptyCartContainer.style.display = 'block';
+            document.getElementById('cartContainer').style.display = 'none';
+            document.getElementById('emptyCartContainer').style.display = 'block';
           } else {
-            cartContainer.style.display = 'block';
-            emptyCartContainer.style.display = 'none';
+            document.getElementById('cartContainer').style.display = 'block';
+            document.getElementById('emptyCartContainer').style.display = 'none';
           }
         }
       
-        // Handle quantity changes
+        // Maneja los botones de cantidad
         document.querySelectorAll('.quantity-btn').forEach(button => {
           button.addEventListener('click', function(e) {
             e.preventDefault();
             const input = this.parentElement.querySelector('.cart-quantity');
-            const currentValue = parseInt(input.value) || 0;
+            let currentValue = parseInt(input.value) || 0;
             const maxStock = parseInt(input.dataset.stock) || Infinity;
-            
+      
+            // Ajusta la cantidad y elimina el producto si llega a 0
             if (this.classList.contains('minus') && currentValue > 0) {
               input.value = currentValue - 1;
             } else if (this.classList.contains('plus') && currentValue < maxStock) {
               input.value = currentValue + 1;
             }
-            
-            // Update cart
+      
+            // Elimina el elemento si la cantidad es 0
+            if (parseInt(input.value) === 0) {
+              this.closest('.cart-item').remove();
+            }
+      
             updateCartState();
-            
-            // Update cart on server
+      
+            // Envía el cambio al servidor
             fetch('/cart/change', {
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                line: input.dataset.line,
-                quantity: input.value,
-                id: input.dataset.id
-              })
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ line: input.dataset.line, quantity: input.value, id: input.dataset.id })
             });
           });
         });
       
-        // Handle direct quantity input
+        // Controla el cambio directo en el campo de cantidad
         document.querySelectorAll('.cart-quantity').forEach(input => {
           input.addEventListener('change', function() {
             const value = parseInt(this.value) || 0;
             const maxStock = parseInt(this.dataset.stock) || Infinity;
-            
-            // Ensure value is within bounds
+      
+            // Asegura que el valor esté dentro de los límites
             if (value < 0) this.value = 0;
             if (value > maxStock) this.value = maxStock;
-            
+      
+            // Elimina el elemento si la cantidad es 0
+            if (parseInt(this.value) === 0) {
+              this.closest('.cart-item').remove();
+            }
+      
             updateCartState();
-            
-            // Update cart on server
+      
+            // Envía el cambio al servidor
             fetch('/cart/change', {
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                line: this.dataset.line,
-                quantity: this.value,
-                id: this.dataset.id
-              })
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ line: this.dataset.line, quantity: this.value, id: this.dataset.id })
             });
           });
         });
       
-        // Handle remove links
-        document.querySelectorAll('a[href^="/cart/change"]').forEach(link => {
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const row = this.closest('tr');
-            row.style.opacity = '0.5';
-            
-            fetch(this.href)
-              .then(response => response.json())
-              .then(() => {
-                row.remove();
-                updateCartState();
-              });
-          });
-        });
-      
-        // Modal handling
-        const modal = document.getElementById('confirmationModal');
-        const closeBtn = document.querySelector('.close');
-        const confirmBtn = document.getElementById('confirmRemove');
-      
-        closeBtn.onclick = function() {
-          modal.style.display = "none";
-        }
-      
-        confirmBtn.onclick = function() {
-          modal.style.display = "none";
-        }
-      
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-      
-        // Initial cart state check
+        // Actualiza el estado del carrito al cargar
         updateCartState();
       });
+      
       
     </script>
     

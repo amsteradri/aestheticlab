@@ -136,5 +136,84 @@
         }
     </script>
 
+
+    <div id="slide-cart" class="slide-cart" style="right: -400px;">
+        <div class="slide-cart-content">
+            <button id="close-slide-cart">Cerrar</button>
+            <h2>Contenido del carrito</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total">
+                <h3>Total: <span id="total-price">€0.00</span></h3> <!-- Cambiado a euros -->
+            </div>
+            <button id="view-cart-button">Ver Carrito</button>
+            <button id="checkout-button">Pagar Ahora</button> <!-- Botón para pagar -->
+        </div>
+    </div>
+    <script>
+        document.getElementById('add-to-cart-button').addEventListener('click', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+            const variantId = document.getElementById('variant-id').value;
+            const quantity = document.getElementById('hidden-quantity').value;
+        
+            // Simular la adición al carrito
+            fetch('/cart/add.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ id: variantId, quantity: quantity })
+            })
+            .then(response => response.json())
+            .then(() => {
+                return fetch('/cart.js');
+            })
+            .then(response => response.json())
+            .then(cart => {
+                const cartItemsContainer = document.getElementById('cart-items');
+                cartItemsContainer.innerHTML = '';
+                let totalPrice = 0;
+        
+                // Mostrar el precio de los artículos y el total en euros
+                cart.items.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('cart-item');
+                    itemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.product_title}">
+                        <div class="cart-item-details">
+                            <div>${item.quantity} x ${item.product_title} - ${(item.price / 100).toFixed(2)}€</div>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                    totalPrice += item.price * item.quantity; // Sumar el precio total
+                });
+
+                // Mostrar el total en euros
+                document.getElementById('total-price').innerText = `${(totalPrice / 100).toFixed(2)}€`; // Mostrar el total en euros
+        
+                // Mostrar el carrito
+                document.getElementById('slide-cart').style.right = '0';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+        
+
+        document.getElementById('view-cart-button').addEventListener('click', function() {
+            window.location.href = '/cart'; // Cambia esta ruta a la URL de tu carrito
+        });
+        // Cerrar el carrito
+        document.getElementById('close-slide-cart').addEventListener('click', function() {
+            document.getElementById ('slide-cart').style.right = '-400px'; // Oculta el carrito al cerrar
+        });
+        
+        // Manejar el clic en el botón de "Pagar Ahora"
+        document.getElementById('checkout-button').addEventListener('click', function() {
+            // Redirigir a la página de pago
+            window.location.href = '/checkout';
+        });
+    </script>
+
 </body>
 

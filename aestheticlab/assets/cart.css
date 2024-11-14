@@ -5,7 +5,7 @@
     width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
     max-width: 1200px; /* Limita el tamaño máximo */
     margin: 0 auto;
-    background-color: black;
+    background-color: rgb(255, 255, 255);
 
     border-radius: 30px;
     border: 3px solid white;
@@ -23,6 +23,7 @@
     display: block;
     margin: 0 auto;
     margin-top: 5px;
+    margin-bottom: 30px;
 }
 
 .cart-container h1 {
@@ -30,34 +31,6 @@
     color: #ffffff;
 }
 
-/* Tabla del carrito */
-.cart-container table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    table-layout: fixed; /* Evita que las celdas se estiren más de lo necesario */
-}
-
-.cart-container table th, 
-.cart-container table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-    color: white;
-    word-wrap: break-word; /* Asegura que el texto largo no desborde */
-}
-
-.cart-container table th {
-    background-color: #333;
-    font-weight: bold;
-}
-
-.cart-container table td img {
-    max-width: 50px;
-    height: auto;
-    display: inline-block;
-    word-wrap: break-word; /* Asegura que la imagen no desborde */
-}
 
 /* Asegura que el contenido de los botones también se ajuste */
 .cart-container .quantity-control input {
@@ -93,22 +66,6 @@
 }
 
 
-/* Estilo de los botones */
-.checkout-btn, .back-button {
-    padding: 12px 40px;
-    margin: 10px 0;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    border: 2px solid #ffffff;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    box-sizing: border-box; /* Asegura que el padding no aumente el tamaño total del botón */
-}
-
 .checkout-btn:hover, .back-button:hover {
     background-color: #666;
     color: white;
@@ -117,13 +74,12 @@
 
 /* Estilo para los totales */
 .totals-container {
-    background-color: #000000;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
     border-radius: 15px;
     padding: 20px;
     margin-top: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -140,16 +96,16 @@
 
 /* Estilo para los valores de los totales */
 .total {
-    font-size: 22px;
-    font-weight: 700;
-    color: #f2f2f2; /* Blanco claro para los totales */
+    font-size: 18px;
+    font-weight: 500;
+    color: #000000; /* Blanco claro para los totales */
 }
 
 /* Enfoque en el total final */
 .grand-total-container p {
-    font-size: 24px;
-    font-weight: 800;
-    color: #ffffff; /* Color naranja para destacar el total */
+    font-size: 22px;
+    font-weight: 600;
+    color: #000000; /* Color naranja para destacar el total */
 }
 
 /* Mejorar la legibilidad y dar espacio */
@@ -189,10 +145,9 @@
 }
 
 .modal .close {
-    color: #aaa;
+    color: #000000;
     float: right;
     font-size: 28px;
-    font-weight: bold;
 }
 
 .modal .close:hover,
@@ -208,18 +163,18 @@
     justify-content: center; /* Centra los botones horizontalmente */
     align-items: center; /* Centra los botones verticalmente */
     flex-direction: column; /* Coloca los botones uno debajo del otro */
-    margin-top: 30px; /* Separación superior */
+    margin-top: 5px; /* Separación superior */
 }
 
 /* Estilos para los botones */
 .checkout-btn, .back-button {
     display: inline-block;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    padding: 12px 40px; /* Ajuste de padding para que sean más grandes */
-    border-radius: 10px; /* Bordes más cuadrados */
+    padding: 12px 35px; /* Ajuste de padding para que sean más grandes */
+    border-radius: 8px; /* Bordes más cuadrados */
     transition: all 0.3s ease; /* Transición suave para los efectos */
     position: relative;
     overflow: hidden;
@@ -247,22 +202,337 @@
     border-color: #666;
 }
 
-/* Empty Cart Styles */
+/* Contenedor del mensaje de carrito vacío */
 .cart-empty {
-    display: none;
-    text-align: center;
-    padding: 50px;
-    background-color: black;
-    border-radius: 30px;
-    margin-top: 60px;
-    border: 3px solid white;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh; /* Ajustado para permitir espacio para el logo arriba */
+  color: #000000;
+  background-color: #ffffff; /* Fondo suave */
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 20vh; /* Ajustado para dar margen respecto al logo */
 }
 
-.cart-empty h2 {
-    color: white;
-    font-size: 24px;
-    margin-bottom: 30px;
+/* Logo en la parte superior */
+.brand-logo-empty {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 150px;
+  margin-bottom: 20px;
 }
+
+/* Estilo del texto del mensaje */
+.cart-empty h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Estilo del contenedor del botón */
+.back-to-store {
+  margin-top: 10px;
+}
+
+/* Estilos de fuente del botón "Añadir al carrito" aplicados a los botones de checkout y back */
+.back-button-empty {
+    font-size: 1.2rem; /* Tamaño de fuente igual a .add-to-cart-button */
+    color: #000000; /* Texto negro igual a .add-to-cart-button */
+    font-family: inherit; /* Asegura que la familia de fuente sea la misma */
+    font-weight: normal; /* Peso de fuente igual a .add-to-cart-button */
+    /* El resto de estilos se mantienen como están */
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    padding: 12px 35px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 10px 0;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+}
+
+.back-button-empty:hover {
+    background-color: #c0d0de; /* Color del botón en hover */
+  }
+
+
+/* Botón para regresar a la tienda */
+.back-button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #000000; /* Color primario del botón */
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #899096; /* Color del botón en hover */
+}
+
+
+
+
+
+/* Contenedor de artículos del carrito en formato de lista */
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Estilos para cada artículo individual en el carrito */
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Imagen del artículo del carrito */
+  .item-image img {
+    width: 100px;  /* Tamaño mediano-grande de la imagen */
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Detalles del producto */
+  .item-details {
+    flex-grow: 1;
+    padding-left: 20px;
+  }
+  
+  .item-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+  }
+  
+  .item-variant {
+    font-size: 1rem;
+    color: #000000;
+  }
+  
+  .remove-link {
+    font-size: 0.9rem;
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  /* Estilo de precio y control de cantidad */
+  .item-pricing {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  
+  .item-price {
+    font-size: 1.2rem;
+
+    color: white;
+  }
+  
+  /* Controles de cantidad */
+  .quantity-control {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity-btn {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cart-quantity {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 5px;
+    border-radius: 4px;
+    
+  }
+  
+.cart-quantity::-webkit-outer-spin-button,
+.cart-quantity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@media (min-width: 2560px) {
+    /* Contenedor principal del carrito */
+    .cart-container {
+      padding: 40px;
+      max-width: 1800px;
+      border-radius: 40px;
+      border: 4px solid white;
+    }
+  
+    /* Encabezado del carrito */
+    .cart-header {
+      margin-bottom: 40px;
+    }
+  
+    .cart-container h1 {
+      font-size: 3rem;
+    }
+  
+    /* Imagen del logo */
+    .brand-logo {
+      width: 350px;
+      margin-top: 10px;
+      margin-bottom: 50px;
+    }
+  
+    /* Controles de cantidad */
+    .cart-container .quantity-control input {
+      width: 70px;
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+  
+    /* Enlaces de productos y eliminar */
+    .cart-container table td a {
+      font-size: 1.4rem;
+    }
+  
+    /* Totales */
+    .totals-container {
+      padding: 30px;
+      border-radius: 20px;
+      gap: 20px;
+    }
+  
+    .subtotal-container, .shipping-container, .grand-total-container {
+      font-size: 24px;
+    }
+  
+    .total, .grand-total-container p {
+      font-size: 28px;
+    }
+  
+    /* Contenedor de botones */
+    .buttons-container {
+      margin-top: 20px;
+    }
+  
+    /* Botones */
+    .checkout-btn, .back-button {
+      font-size: 20px;
+      padding: 16px 40px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+  
+    /* Modal */
+    .modal-content {
+      padding: 30px;
+      font-size: 20px;
+    }
+  
+    .modal button {
+      font-size: 18px;
+    }
+  
+    .modal .close {
+      font-size: 32px;
+    }
+  
+    /* Contenedor del mensaje de carrito vacío */
+    .cart-empty {
+      height: 80vh;
+      border-radius: 12px;
+    }
+  
+    /* Logo del carrito vacío */
+    .brand-logo-empty {
+      max-width: 200px;
+      top: 30px;
+    }
+  
+    /* Texto de carrito vacío */
+    .cart-empty h2 {
+      font-size: 36px;
+    }
+  
+    /* Botón para regresar a la tienda */
+    .back-button {
+      padding: 16px 30px;
+      font-size: 20px;
+      border-radius: 8px;
+    }
+  
+    /* Elementos individuales en el carrito */
+    .cart-item {
+      padding: 15px 0;
+    }
+  
+    /* Imagen del artículo del carrito */
+    .item-image img {
+      width: 150px;
+    }
+  
+    .item-title {
+      font-size: 1.6rem;
+    }
+  
+    .item-variant {
+      font-size: 1.2rem;
+    }
+  
+    /* Precio y control de cantidad */
+    .item-pricing {
+      font-size: 1.6rem;
+    }
+  
+    .item-price {
+      font-size: 1.6rem;
+    }
+  
+/* Controles de cantidad */
+.quantity-btn {
+    padding: 6px 12px;  /* Reducimos el padding para hacer el botón más estrecho */
+    font-size: 1.2rem;
+    height: 30px;  /* Mantemos la altura consistente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-quantity {
+    width: 25px;  /* Reducimos el ancho del campo de cantidad */
+    height: 30px;  /* Igualamos la altura al botón */
+    font-size: 1.2rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+.cart-quantity::-webkit-outer-spin-button,
+.cart-quantity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+  }
+  

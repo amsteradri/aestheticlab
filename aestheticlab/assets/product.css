@@ -382,7 +382,7 @@
     top: 30px; /* Distancia desde el borde superior */
     left: 50%; /* Centra el logo horizontalmente */
     transform: translateX(-50%); /* Ajusta el centro exacto */
-    z-index: 9999; /* Asegura que el logo esté por encima de otros elementos */
+    z-index: 999; /* Asegura que el logo esté por encima de otros elementos */
 }
 
 .logo {
@@ -406,7 +406,7 @@
 }
 
 .size-chart-button:hover {
-    background-color: #0056b3; /* Color de fondo más oscuro al pasar el mouse */
+    background-color: #d4e3f2; /* Color de fondo más oscuro al pasar el mouse */
     transform: scale(1.05); /* Efecto de aumento */
 }
 
@@ -438,7 +438,7 @@
 }
 
 .size-chart-content img {
-    max-width: 90%; /* Asegura que la imagen no exceda el ancho de la pantalla */
+    max-width: 100%; /* Asegura que la imagen no exceda el ancho de la pantalla */
     max-height: 90%; /* Asegura que la imagen no exceda la altura de la pantalla */
     border-radius: 10px; /* Redondear las esquinas de la imagen */
 }
@@ -451,4 +451,112 @@
 /* Estilos para el área detrás de la imagen para hacerla clickeable */
 .size-chart-popup .size-chart-content {
     cursor: pointer; /* Apunta que la imagen es interactiva */
+}
+
+
+
+
+
+.slide-cart {
+    position: fixed;
+    right: -400px; /* Oculto fuera de la pantalla */
+    top: 0; /* Ocupa todo el alto */
+    width: 400px; /* Ancho del carrito */
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+    transition: right 0.3s ease; /* Suaviza la animación */
+    z-index: 1000;
+    height: 100%; /* Ocupa todo el alto de la pantalla */
+    overflow-y: auto; /* Habilitar desplazamiento si es necesario */
+    display: flex;
+    flex-direction: column; /* Coloca los botones en una columna */
+    align-items: center; /* Centra los botones horizontalmente */
+    padding: 20px; /* Espaciado interno */
+}
+
+.slide-cart-content {
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    font-family: 'Titillium Web', sans-serif !important; /* La misma fuente Titillium Web */
+    display: block !important; /* Cambiado de inline-block a block */
+    line-height: 1.6 !important; /* Mantener la propiedad de line-height */
+    padding: 20px;
+}
+
+.slide-cart h2 {
+    margin: 10px 0; /* Espaciado alrededor del título */
+}
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 768px) {
+    .slide-cart {
+        width: 80%; /* Cambia el ancho a un 80% en móviles */
+        right: -80%; /* Asegúrate de que esté oculto completamente */
+    }
+
+    .slide-cart.open {
+        right: 0; /* Muestra el carrito cuando está abierto */
+    }
+
+    .slide-cart-content {
+        padding: 10px; /* Ajusta el padding para que se vea mejor en móviles */
+    }
+
+    .cart-item img {
+        width: 40px; /* Ajusta el tamaño de las imágenes de los productos */
+    }
+
+    #view-cart-button, #checkout-button {
+        width: 80%; /* Botones ocupan todo el ancho */
+        margin-top: 10px; /* Espacio entre botones */
+    }
+
+    #close-slide-cart{
+        width: 40%; /* Botones ocupan todo el ancho */
+        margin-top: 10px; /* Espacio entre botones */
+    }
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cart-item img {
+    width: 50px; /* Ajustar el tamaño de la imagen */
+    height: auto;
+    margin-right: 10px;
+}
+
+.cart-item-details {
+    flex-grow: 1; /* Ocupa el espacio restante */
+}
+
+/* Estilo de los botones */
+#close-slide-cart {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 8px 15px; /* Botón de cerrar más pequeño */
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Espacio debajo del botón de cerrar */
+}
+
+#view-cart-button, #checkout-button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Botones de ver carrito y pagar ahora del mismo tamaño */
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px; /* Espacio entre botones */
+}
+
+/* Efecto hover para los botones */
+#close-slide-cart:hover,
+#view-cart-button:hover,
+#checkout-button:hover {
+    background-color: #d3e3f3; /* Color más claro al pasar el mouse */
 }

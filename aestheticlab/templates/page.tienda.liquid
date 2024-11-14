@@ -31,7 +31,7 @@
                         {% else %}
                             <span class="cart-count">0 items</span>
                         {% endif %}
-                        <img src="{{ 'shopping-cart.png' | asset_url }}" alt="Carrito" class="cart-icon">
+                        <img src="{{ 'shopping-cart2.png' | asset_url }}" alt="Carrito" class="cart-icon">
                     </a>
                 </div>
                 
@@ -168,13 +168,32 @@
         </script>
     
         <footer class="footer">
-            <p class="footer-text">"La moda es arte en movimiento" — Desarrollado por Adrián Gutiérrez. — Para Aestheticlab</p>
+            <p class="footer-text">"La moda es arte en movimiento" — Desarrollado por 
+                <a href="https://amsteradri.github.io/portfolio_adgutier/" target="_blank" class="portfolio-link">Adrián Gutiérrez</a> — Para Aestheticlab
+            </p>
             <div class="footer-links">
                 <a href="https://www.instagram.com/aestheticlab.official/" target="_blank">Instagram</a> |
                 <a href="https://www.tiktok.com/@aestheticlab.official?is_from_webapp=1&sender_device=pc" target="_blank">Tiktok</a>
-                
             </div>
         </footer>
+        
+        <style>
+            /* Estilos para el enlace del portafolio */
+            .portfolio-link {
+                color: inherit; /* Hereda el color del texto padre */
+                text-decoration: underline; /* Quita el subrayado */
+            }
+            
+            /* Estilos para evitar color de enlace visitado y mantener siempre el color original */
+            .portfolio-link:visited,
+            .portfolio-link:hover,
+            .portfolio-link:active {
+                color: inherit; /* Mantiene el color original */
+                text-decoration: underline; /* Evita el subrayado en todos los estados */
+            }
+        </style>
+        
+        
     
         {{ content_for_footer }}
     </body>

@@ -1,0 +1,173 @@
+{% layout 'page' %}
+
+<div class="policies-page">
+  <!-- Logo de la tienda encima de la página -->
+  <div class="tienda-logo">
+    <img src="{{ 'al_logo_negro.png' | asset_url }}" alt="Logo de Tienda" style="max-width: 300px;">
+  </div>
+
+  <h1>Políticas de la tienda</h1>
+
+  <section id="privacy-policy">
+    <h2>Política de Privacidad</h2>
+    <div class="policy-content">
+      {{ shop.privacy_policy | raw }}
+    </div>
+  </section>
+
+  <section id="legal-notice">
+    <h2>Aviso Legal</h2>
+    <div class="policy-content">
+      {{ shop.legal_notice | raw }}
+    </div>
+  </section>
+
+  <section id="refund-policy">
+    <h2>Política de Devoluciones y Reembolsos</h2>
+    <div class="policy-content">
+      {{ shop.refund_policy | raw }}
+    </div>
+  </section>
+
+  <section id="shipping-policy">
+    <h2>Política de Envío</h2>
+    <div class="policy-content">
+      {{ shop.shipping_policy | raw }}
+    </div>
+  </section>
+
+  <section id="terms-of-service">
+    <h2>Términos de Servicio</h2>
+    <div class="policy-content">
+      {{ shop.terms_of_service | raw }}
+    </div>
+  </section>
+
+  <section id="contact-info">
+    <h2>Información de Contacto</h2>
+    <div class="policy-content">
+      <p>Para contactar con nosotros, puedes enviarnos un correo a: <a href="mailto:aestheticlab00@gmail.com">aestheticlab00@gmail.com</a>.</p>
+    </div>
+  </section>
+  
+</div>
+
+<style>
+  /* Contenedor principal */
+  .policies-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Logo de la tienda animado */
+  .tienda-logo {
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    animation: quickDrop 0.6s cubic-bezier(0.2, 1, 0.2, 1) forwards;
+    animation-delay: 1.5s;
+    margin-bottom: 40px; /* Espaciado debajo del logo */
+  }
+
+  .tienda-logo img {
+    max-width: 300px; /* Ajusta el tamaño máximo del logo */
+    height: auto;
+  }
+
+  /* Animación de caída del logo */
+  @keyframes quickDrop {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Título principal */
+  .policies-page h1 {
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #2d2d2d;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+  }
+
+  /* Estilo de cada sección */
+  .policies-page h2 {
+    font-size: 1.75em;
+    font-weight: 600;
+    color: #1a1a1a;
+    border-bottom: 2px solid #2a9d8f;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  /* Estilo del contenido de la política */
+  .policy-content {
+    font-size: 1.1em;
+    line-height: 1.75;
+    margin-top: 15px;
+    color: #555;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .policy-content ul {
+    padding-left: 20px;
+  }
+
+  .policy-content ol {
+    padding-left: 20px;
+  }
+
+  /* Enlaces dentro del contenido */
+  .policy-content a {
+    color: #2a9d8f;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .policy-content a:hover {
+    color: #1d7f65;
+    text-decoration: underline;
+  }
+
+  /* Resaltado de texto importante */
+  .policy-content strong {
+    font-weight: 700;
+    color: #333;
+  }
+
+  /* Estilo responsivo */
+  @media (max-width: 768px) {
+    .policies-page {
+      padding: 20px;
+    }
+
+    .policies-page h1 {
+      font-size: 2em;
+    }
+
+    .policies-page h2 {
+      font-size: 1.5em;
+    }
+
+    .policy-content {
+      font-size: 1em;
+      padding: 20px;
+    }
+  }
+</style>

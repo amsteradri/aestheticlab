@@ -54,67 +54,6 @@
                         {% endfor %}
                       </div>                      
                   </div>
-                  
-                
-                  <div id="quienes-somos-content" class="section-content" style="display: none;">
-                    <div class="quienes-somos-container">
-                        <h2>Aesthetic Lab</h2>
-                        <p>Somos dos amigos de 20 años que han decidido emprender en una marca de ropa de gimnasio. Lo que comenzó como una chispa de inspiración se ha convertido en Aesthetic Lab, una marca que fusiona el estilo contemporáneo con la calidad excepcional.</p>
-                        
-                        <!-- Sección de socios -->
-                        <div class="socios">
-                            <div class="socio">
-                                <img src="{{ 'socio1.png' | asset_url }}" alt="Socio 1" class="socio-imagen">
-                                <p class="socio-nombre">Oriol Collado</p>
-                            </div>
-                            <div class="socio">
-                                <img src="{{ 'socio2.png' | asset_url }}" alt="Socio 2" class="socio-imagen">
-                                <p class="socio-nombre">Sergi Barragan</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Valores de la marca -->
-                        <div class="valores">
-                            <div class="valor">
-                                <h3>Calidad</h3>
-                                <p>Utilizamos los mejores materiales y procesos de fabricación para garantizar productos duraderos.</p>
-                            </div>
-                            <div class="valor">
-                                <h3>Diseño</h3>
-                                <p>Todo ha sido diseñado por nosotros a mano desde el principio, a base de prueba y error, para ofrecer un estilo único y funcional.</p>
-                            </div>
-                            <div class="valor">
-                                <h3>Sostenibilidad</h3>
-                                <p>Usamos materiales 100% algodón, resistentes a lavados y manchas, para un menor impacto en el medio ambiente y una larga durabilidad.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <div id="contacto-content" class="section-content" style="display: none;">
-                    <div class="contacto-container">
-                        <h2>Contacto</h2>
-                        <div class="contacto-info">
-                            <div class="info-item">
-                                <h3>Email</h3>
-                                <p>info@aestheticlab.com</p>
-                            </div>
-                            <div class="info-item">
-                                <h3>Teléfono</h3>
-                                <p>+34 XXX XXX XXX</p>
-                            </div>
-                            <div class="info-item">
-                                <h3>Redes Sociales</h3>
-                                <div class="social-links">
-                                    <a href="#" target="_blank">Instagram</a>
-                                    <a href="#" target="_blank">Facebook</a>
-                                    <a href="#" target="_blank">Twitter</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     
@@ -168,12 +107,29 @@
         </script>
     
         <footer class="footer">
-            <p class="footer-text">"La moda es arte en movimiento" — Desarrollado por 
-                <a href="https://amsteradri.github.io/portfolio_adgutier/" target="_blank" class="portfolio-link">Adrián Gutiérrez</a> — Para Aestheticlab
-            </p>
-            <div class="footer-links">
-                <a href="https://www.instagram.com/aestheticlab.official/" target="_blank">Instagram</a> |
-                <a href="https://www.tiktok.com/@aestheticlab.official?is_from_webapp=1&sender_device=pc" target="_blank">Tiktok</a>
+            <div class="footer-content">
+                <p class="footer-text">"La moda es arte en movimiento" — Desarrollado por 
+                    <a href="https://amsteradri.github.io/portfolio_adgutier/" target="_blank" class="portfolio-link">Adrián Gutiérrez</a> — Para Aestheticlab
+                </p>
+                
+                <div class="footer-links">
+                    <a href="https://www.instagram.com/aestheticlab.official/" target="_blank">Instagram</a> |
+                    <a href="https://www.tiktok.com/@aestheticlab.official?is_from_webapp=1&sender_device=pc" target="_blank">Tiktok</a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="/pages/politicas" target="_self">Política de Privacidad</a> |
+                    <a href="/pages/politicas#aviso-legal" target="_self">Aviso Legal</a> |
+                    <a href="/pages/politicas#devoluciones" target="_self">Devoluciones</a> |
+                    <a href="/pages/politicas#envios" target="_self">Envíos</a> |
+                    <a href="/pages/politicas#terminos" target="_self">Términos de Servicio</a> |
+                    <a href="/pages/politicas#contacto" target="_self">Información de Contacto</a>
+                </div>
+                
+            </div>
+            
+            <div class="footer-copyright">
+                <p>© 2024, PBS</p>
             </div>
         </footer>
         
@@ -181,7 +137,7 @@
             /* Estilos para el enlace del portafolio */
             .portfolio-link {
                 color: inherit; /* Hereda el color del texto padre */
-                text-decoration: underline; /* Quita el subrayado */
+                text-decoration: underline; /* Subrayado */
             }
             
             /* Estilos para evitar color de enlace visitado y mantener siempre el color original */
@@ -191,7 +147,55 @@
                 color: inherit; /* Mantiene el color original */
                 text-decoration: underline; /* Evita el subrayado en todos los estados */
             }
+        
+            /* Estilos generales del footer */
+            .footer {
+                background-color: #333; /* Fondo oscuro */
+                color: white; /* Texto blanco */
+                padding: 20px 40px;
+                font-family: Arial, sans-serif;
+            }
+        
+            .footer-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+        
+            .footer-text {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        
+            .footer-links,
+            .footer-terms {
+                text-align: center;
+                margin-top: 10px;
+            }
+        
+            .footer-links a,
+            .footer-terms a {
+                color: white;
+                text-decoration: none;
+                margin: 0 10px;
+            }
+        
+            .footer-links a:hover,
+            .footer-terms a:hover {
+                text-decoration: underline; /* Subrayado al pasar el ratón */
+            }
+        
+            .footer-copyright {
+                text-align: left;
+                font-size: 12px;
+                margin-top: 20px;
+                position: absolute;
+                bottom: 10px;
+                left: 20px;
+            }
         </style>
+        
         
         
     

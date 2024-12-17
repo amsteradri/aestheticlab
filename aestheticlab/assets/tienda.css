@@ -490,3 +490,109 @@ body, html {
   color: #ddd;
 }
 
+
+
+@media (min-width: 768px) and (max-width: 1920px) {
+  /* Ajuste en el contenedor de los productos */
+  .productos {
+    gap: 15px; /* Espacio reducido entre productos */
+    margin-left: 20px; /* Ajuste del margen izquierdo */
+    margin-right: 20px; /* Ajuste del margen derecho */
+    margin-top: 30px; /* Ajuste para margen superior */
+  }
+
+  /* Ajustes para cada contenedor de producto */
+  .producto-container {
+    width: 380px; /* Ancho moderado de los productos */
+    height: 540px; /* Altura moderada de los productos */
+    max-width: 100%; /* Asegura que el contenedor no se desborde */
+    margin-left: 40px; /* Margen izquierdo ajustado */
+    overflow: hidden; /* Asegura que cualquier desbordamiento de imagen no sea visible */
+    position: relative; /* Para un control adecuado sobre el contenido de la imagen */
+    display: flex; /* Usamos flexbox para la disposición de los elementos */
+    flex-direction: column; /* Alineamos los elementos verticalmente */
+  }
+
+  /* Ajuste en el nombre del producto */
+  .producto-nombre {
+    font-size: clamp(16px, 2vw, 28px); /* Tamaño de fuente adaptable con límite inferior de 16px y superior de 28px */
+    text-align: center; /* Alineamos el texto al centro */
+    margin-top: 10px; /* Separación con la imagen */
+  }
+
+  /* Ajuste en el precio del producto */
+  .producto-precio {
+    font-size: clamp(14px, 1.5vw, 24px); /* Tamaño de fuente adaptable con límite inferior de 14px y superior de 24px */
+    text-align: center; /* Alineamos el texto al centro */
+    margin-top: 5px; /* Separación con el nombre del producto */
+  }
+
+  /* Ajustes para la imagen del producto */
+  .imagen-container {
+    width: 100%; /* La imagen ocupa el 100% del contenedor */
+    height: 60%; /* Asignamos un tamaño fijo para la imagen */
+    overflow: hidden; /* Esconde cualquier parte de la imagen que se desborde del contenedor */
+    display: flex; /* Alineamos la imagen dentro de su contenedor */
+    justify-content: center; /* Centrar la imagen horizontalmente */
+    align-items: center; /* Centrar la imagen verticalmente */
+  }
+
+  .imagen-container img {
+    width: 100%; /* Asegura que la imagen se ajuste al contenedor */
+    height: 100%; /* Asegura que la imagen ocupe todo el alto del contenedor */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del contenedor sin cortarse */
+  }
+
+  /* Estilo para los botones */
+  .agregar-al-carrito {
+    padding: 6px 16px; /* Tamaño adecuado para el botón */
+    font-size: 1vw; /* Tamaño de la fuente moderado */
+  }
+
+  /* Ajustes de menú */
+  .menu {
+    flex-wrap: wrap;
+    gap: 20px; /* Espaciado entre elementos */
+  }
+
+  .menu a {
+    font-size: 18px; /* Tamaño moderado para los enlaces del menú */
+  }
+
+  .tienda-logo img {
+    width: 250px; /* Tamaño adecuado para el logo */
+  }
+
+  /* Ajustes específicos para el contenedor del carrito */
+  .menu a.cart-link {
+    padding-right: 4vw; /* Ajuste del espaciado del carrito */
+  }
+
+  .menu-container {
+    margin-right: 10px;
+    justify-content: flex-end;
+  }
+
+  .menu {
+    justify-content: flex-end;
+  }
+
+  /* Cambiar el número de productos por fila según el ancho */
+  @media (max-width: 1669px) {
+    .productos {
+      grid-template-columns: repeat(3, 1fr); /* 3 productos por fila */
+    }
+  }
+
+  @media (max-width: 1180px) {
+    .productos {
+      grid-template-columns: repeat(2, 1fr); /* 2 productos por fila */
+    }
+  }
+
+  @media (max-width: 780px) {
+    .productos {
+      grid-template-columns: repeat(1, 1fr); /* 1 producto por fila */
+    }
+  }
+}

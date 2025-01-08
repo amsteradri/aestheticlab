@@ -9,6 +9,7 @@
 /* Rotor group headings */
 .flipdown.flipdown__theme-dark .rotor-group-heading:before {
   color: #ffffff;
+  animation: glow 1.5s ease-in-out infinite alternate;
 }
 /* Delimeters */
 .flipdown.flipdown__theme-dark .rotor-group:nth-child(n+2):nth-child(-n+3):before,
@@ -210,7 +211,7 @@
   border-radius: 0px 0px 4px 4px;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 767px) {
 
   .flipdown {
     width: 312px;

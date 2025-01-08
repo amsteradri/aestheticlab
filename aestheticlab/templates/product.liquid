@@ -53,12 +53,19 @@
                         {% endif %}
                     {% endfor %}
                 </div>   
+                <!-- Texto de recomendación -->
+                <p class="size-recommendation">Recomendamos elegir una talla menos, ya que el diseño es oversize.</p>
+
+                <!-- Botón de la tabla de tallas -->
                 <button type="button" class="size-chart-button" onclick="showSizeChart()">Tabla de Tallas</button>
+
+                <!-- Pop-up de la tabla de tallas -->
                 <div id="size-chart-popup" class="size-chart-popup" onclick="hideSizeChart(event)">
                     <div class="size-chart-content">
                         <img src="{{ 'tabla_de_tallas.png' | asset_url }}" alt="Tabla de Tallas">
                     </div>
                 </div>
+
                 
         </div>
 
@@ -181,7 +188,8 @@
                     itemElement.innerHTML = `
                         <img src="${item.image}" alt="${item.product_title}">
                         <div class="cart-item-details">
-                            <div>${item.quantity} x ${item.product_title} - ${(item.price / 100).toFixed(2)}€</div>
+                            <div>${item.quantity} x ${item.product_title} - Talla: ${item.variant_title} - ${(item.price / 100).toFixed(2)}€</div>
+
                         </div>
                     `;
                     cartItemsContainer.appendChild(itemElement);

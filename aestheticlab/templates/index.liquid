@@ -1,6 +1,36 @@
 <!DOCTYPE html>
     <html lang="es">
     <head>
+        <!-- Favicon básico -->
+        <!-- Favicon básico -->
+<link rel="icon" href="{{ 'favicon.ico' | asset_url }}" type="image/x-icon">
+
+<!-- Favicons para otros formatos -->
+<link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32x32.png' | asset_url }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon-16x16.png' | asset_url }}">
+
+<!-- Apple touch icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="{{ 'apple-touch-icon.png' | asset_url }}">
+
+<!-- Web manifest (opcional) -->
+<link rel="manifest" href="{{ 'site.webmanifest' | asset_url }}">
+
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "AestheticLab Shop",
+              "url": "https://www.aestheticlab.shop/",
+              "logo": "www.aestheticlab.shop/cdn/shop/t/14/assets/al_logo_negro.png?v=43125383968480736181731428828",
+              "sameAs": [
+                "https://www.instagram.com/aestheticlab.eu/",
+                "https://www.tiktok.com/@aestheticlab.eu?is_from_webapp=1&sender_device=pc"
+              ]
+            }
+            </script>
+            
+        <meta name="google-site-verification" content="cg_1AU7VCkuNTSz_22BhK6Ycf1cBJ0vjuUq7exJT2SI" />
+        <meta name="google-site-verification" content="fjCne9-aFev9zkVBWVthkzjJpVPaVNYPq5ewoT_WNMo" />
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{ page_title }}</title>
@@ -55,6 +85,13 @@
             animation: glow 1.5s ease-in-out infinite alternate;
         }
 
+        @media (max-width: 767px) {
+            .coming-soon-text {
+                font-size: 1.3rem;
+                margin: 14px;  
+            }
+        }
+
         /* Efecto de resplandor */
         @keyframes glow {
             0% {
@@ -73,11 +110,11 @@
             </div>
     
             <!-- Contenedor para el FlipDown -->
-            <div id="flipdown" class="flipdown"></div>
-            <div class="coming-soon-text">FIRST DROP COMING SOON!</div>
+            {% comment %} <div id="flipdown" class="flipdown"></div>
+            <div class="coming-soon-text">PRIMER DROP PRÓXIMAMENTE!📢</div> {% endcomment %}
     
             <!-- Botón de acceso -->
-            {% comment %} <a href="/pages/tienda" class="access-link">[ ACCEDER ]</a> {% endcomment %}
+            <a href="/pages/tienda" class="access-link">[ ACCEDER ]</a>
         </div>
     
         {{ content_for_footer }}
@@ -88,7 +125,7 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Establecer la fecha y hora objetivo: 21 de diciembre de 2024 a las 17:00 (5 PM)
-                var targetDate = new Date('December 21, 2024 17:00:00 GMT+0000'); // Usa tu zona horaria si es necesario
+                var targetDate = new Date('December 21, 2024 16:15:00 GMT+0000'); // Usa tu zona horaria si es necesario
                 var datetime = Math.floor(targetDate.getTime() / 1000); // Convertir a segundos desde la época Unix
     
                 // Inicializar el FlipDown en el contenedor

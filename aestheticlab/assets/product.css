@@ -73,7 +73,7 @@
     width: 45%; /* Ajuste del tamaño del contenedor */
     padding: 20px;
     border-radius: 10px;
-    margin-top: 300px; /* Mueve el cuadro de información hacia abajo */
+    margin-top: 200px; /* Mueve el cuadro de información hacia abajo */
     margin-left: 0; /* No tenemos que dejar margen izquierdo, ya que está más cerca de la imagen */
 }
 
@@ -156,23 +156,64 @@
 /* Botón de añadir al carrito */
 
 .add-to-cart-button {
+    position: relative;
     padding: 15px 30px;
     font-size: 1.2rem;
-    color: #000000; /* Texto negro */
-    background-color: #ffffff; /* Fondo blanco */
-    border: 1px solid #000000; /* Borde negro del botón */
+    color: #000; /* Texto negro inicial */
+    background-color: #fff; /* Fondo blanco inicial */
+    border: 1px solid #000; /* Borde negro */
     border-radius: 5px;
     cursor: pointer;
-    width: 60%;
-    transition: background-color 0.1s ease, outline 0.1s ease, border 0.1s ease; /* Añadir transición al borde */
+    width: 60%; /* Mantener el ancho del botón */
+    transition: color 0.3s ease, background-color 0.3s ease, outline 0.1s ease, border 0.1s ease;
+    overflow: hidden; /* Para ocultar el pseudo-elemento fuera del botón */
+    z-index: 1; /* Mantener el texto encima del pseudo-elemento */
 }
 
-/* Efecto hover para el botón */
+/* Pseudo-elemento que funciona como la animación */
+.add-to-cart-button::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 0; /* Inicialmente invisible */
+    bottom: 0;
+    left: 0;
+    background: #000; /* Color de fondo negro */
+    z-index: -1; /* Detrás del contenido del botón */
+    transition: height 0.3s ease; /* Suavizar la expansión del fondo */
+}
+
+/* Cambios al hacer hover */
 .add-to-cart-button:hover {
-    color: #000000; /* Asegurar que el texto se quede negro */
-    outline: 2px solid #000000; /* Contorno negro fino */
+    color: #fff; /* Texto cambia a blanco */
+    background-color: #fff; /* Mantener fondo blanco */
+}
+
+.add-to-cart-button:hover::after {
+    top: 0;
+    height: 100%; /* Llena todo el botón */
+}
+
+/* Efecto al hacer clic */
+.add-to-cart-button:active {
+    top: 2px; /* Efecto de clic */
+}
+
+
+.size-recommendation {
+    font-size: 0.7em;
+    color: #181818;
+    margin-bottom: 10px;
+    font-style: italic;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    font-family: 'Titillium Web', sans-serif !important; /* La misma fuente Titillium Web */
+    display: block !important; /* Cambiado de inline-block a block */
+    transform: scaleY(0.9) !important; /* Aplana el texto verticalmente al 90% de su altura */
+    line-height: 1.6 !important; /* Mantener la propiedad de line-height */
     
 }
+
 
 /* Media Query para dispositivos móviles */
 @media (max-width: 768px) {
@@ -459,9 +500,9 @@
 
 .slide-cart {
     position: fixed;
-    right: -400px; /* Oculto fuera de la pantalla */
+    right: -200px; /* Oculto fuera de la pantalla */
     top: 0; /* Ocupa todo el alto */
-    width: 400px; /* Ancho del carrito */
+    width: 300px; /* Ancho del carrito */
     background-color: white;
     box-shadow: -2px 0 5px rgba(0,0,0,0.3);
     transition: right 0.3s ease; /* Suaviza la animación */

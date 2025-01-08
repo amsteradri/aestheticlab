@@ -239,9 +239,9 @@ body, html {
 
   /* Ajustes para la imagen del producto */
   .imagen-container {
-    height: 16vw; /* Reducción aún mayor de la altura de las imágenes */
-    max-height: 360px; /* Limitar la altura máxima */
-    width: 100%; /* La imagen ocupa el 100% del contenedor */
+    height: 18vw; /* Reducción aún mayor de la altura de las imágenes */
+    max-height: 450px; /* Limitar la altura máxima */
+    width: 110%; /* La imagen ocupa el 100% del contenedor */
   }
 
   .imagen-container img {
@@ -596,3 +596,4 @@ body, html {
     }
   }
 }
+
